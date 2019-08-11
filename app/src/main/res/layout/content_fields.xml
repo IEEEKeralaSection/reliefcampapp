@@ -131,11 +131,21 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/note" />
 
+
+            <EditText
+                android:id="@+id/checkin"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/note"
+                android:editable="false"
+                android:layout_marginTop="20dp"
+                android:hint="@string/checkin" />
+
             <Button
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_below="@+id/note"
+                android:layout_below="@+id/checkin"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="20dp"

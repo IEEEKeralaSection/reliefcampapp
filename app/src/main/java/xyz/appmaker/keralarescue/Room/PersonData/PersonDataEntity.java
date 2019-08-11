@@ -47,10 +47,14 @@ public class PersonDataEntity {
     @ColumnInfo(name="person_status")
     public String personStatus = "new";
 
+    @SerializedName("checkin_date")
+    @ColumnInfo(name="checkin_date")
+    public String checkinDate;
+
     public PersonDataEntity() {
     }
 
-    public PersonDataEntity(String name, String campName, String age, String gender, String address, String district, String mobile, String note, String personStatus,String syncStatus) {
+    public PersonDataEntity(String name, String campName, String age, String gender, String address, String district, String mobile, String note, String personStatus,String checkinDate, String syncStatus) {
         this.name = name;
         this.camped_at = campName;
         this.age = age;
@@ -60,6 +64,7 @@ public class PersonDataEntity {
         this.mobile = mobile;
         this.note = note;
         this.personStatus = personStatus;
+        this.checkinDate = checkinDate;
         this.syncStatus = syncStatus;
     }
 
