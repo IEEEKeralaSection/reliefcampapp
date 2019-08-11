@@ -2,8 +2,11 @@ package xyz.appmaker.keralarescue.Room.PersonData;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+
+import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "person_data")
 public class PersonDataEntity {
@@ -29,18 +32,25 @@ public class PersonDataEntity {
     public String district;
 
     @ColumnInfo(name = "mobile")
+    @SerializedName("phone")
     public String mobile;
 
     @ColumnInfo(name = "note")
+    @SerializedName("notes")
     public String note;
 
     @ColumnInfo(name = "status")
     public String syncStatus;
 
+    @Ignore
+    @SerializedName("status")
+    @ColumnInfo(name="person_status")
+    public String personStatus = "new";
+
     public PersonDataEntity() {
     }
 
-    public PersonDataEntity(String name, String campName, String age, String gender, String address, String district, String mobile, String note, String status) {
+    public PersonDataEntity(String name, String campName, String age, String gender, String address, String district, String mobile, String note, String personStatus,String syncStatus) {
         this.name = name;
         this.camped_at = campName;
         this.age = age;
@@ -49,7 +59,8 @@ public class PersonDataEntity {
         this.district = district;
         this.mobile = mobile;
         this.note = note;
-        this.syncStatus = status;
+        this.personStatus = personStatus;
+        this.syncStatus = syncStatus;
     }
 
 

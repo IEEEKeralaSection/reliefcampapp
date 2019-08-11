@@ -151,6 +151,7 @@ public class FieldsActivity extends AppCompatActivity {
                             districtSelectedValue,
                             mobileEdt.getText().toString(),
                             notesEdt.getText().toString(),
+                            "new",
                             "0");
                     insetPersonDb(personDataModel);
                 }
