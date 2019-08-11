@@ -11,9 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.crashlytics.android.Crashlytics;
-
 import xyz.appmaker.keralarescue.MainActivity;
 import xyz.appmaker.keralarescue.R;
 import xyz.appmaker.keralarescue.Tools.Config;
@@ -71,7 +68,6 @@ public class CampHomeActivity extends AppCompatActivity {
             startActivity(openUrlIntent);
         }
         catch (Exception e){
-            Crashlytics.logException(e);
             Toast.makeText(this,
                     "Couldn't open camp details page, Please make sure you've a web browser installed",
                     Toast.LENGTH_LONG).show();

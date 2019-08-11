@@ -4,11 +4,6 @@
     tools:context="xyz.appmaker.keralarescue.MainActivity">
 
     <item
-        android:id="@+id/action_backup"
-        android:orderInCategory="100"
-        android:title="@string/backup"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="@string/logout"

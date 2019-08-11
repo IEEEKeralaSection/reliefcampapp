@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordEditText;
     PreferensHandler prefs;
     ProgressBar progressBar;
-    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     @Override
@@ -45,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("KeralaRescue.in Camps");
         progressBar = (ProgressBar) findViewById(R.id.loading_login);
         setSupportActionBar(toolbar);
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-
         prefs = new PreferensHandler(getApplicationContext());
         String userToken = prefs.getUserToken();
 
@@ -93,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             prefs.setUserToken(response.body().token);
                             prefs.setUsername(username);
-                            mFirebaseAnalytics.setUserId(username);
                             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_LONG).show();
                             Intent fieldsAct = new Intent(MainActivity.this, CampsActivity.class);
                             startActivity(fieldsAct);
