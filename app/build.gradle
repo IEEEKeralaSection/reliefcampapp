@@ -5,17 +5,12 @@ android {
 
     compileSdkVersion 27
     defaultConfig {
-        applicationId "xyz.appmaker.keralarescue"
+        applicationId "xyz.appmaker.keralarescue.v2"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 8
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [
-                onesignal_app_id               : 'f25cf16a-1d78-4406-b6fc-92c8c7222ee0',
-                // Project number pulled from dashboard, local value is ignored.
-                onesignal_google_project_number: 'REMOTE'
-        ]
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -38,11 +33,7 @@ buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
-    dependencies {
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.11.0, 0.99.99]'
-    }
 }
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 repositories {
     maven { url 'https://maven.google.com' }
@@ -52,7 +43,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:recyclerview-v7:27.1.1'
 
-    implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
 
     // Room components
     implementation "android.arch.persistence.room:runtime:1.1.1"

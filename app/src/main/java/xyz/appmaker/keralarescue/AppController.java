@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.onesignal.OneSignal;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -30,10 +28,6 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
         pref = new PreferensHandler(this);
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
