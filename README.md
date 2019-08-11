@@ -46,5 +46,10 @@ You can use the default username:password (admin:admin) combination for the app 
   - Test Server: [http://35.202.24.11/](http://35.202.24.11/find_people/)
   - Local: [http://localhost:8000/find_people/](http://localhost:8000/find_people/)
   
+  # Releasing new versions
+  - Use the keystore file located [here](app/keystore)
+  - alias - key0
+  - password - keralarescue
+  
   # License
   MIT License

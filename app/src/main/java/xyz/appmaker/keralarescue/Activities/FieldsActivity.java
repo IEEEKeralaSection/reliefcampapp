@@ -61,7 +61,6 @@ public class FieldsActivity extends AppCompatActivity {
     String campSelectedValue = "0";
     APIService apiService;
     TextView titleText;
-    Button btnReq;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -74,7 +73,6 @@ public class FieldsActivity extends AppCompatActivity {
         context = getApplicationContext();
         pref = new PreferensHandler(context);
         syncDetailsTextView = findViewById(R.id.syncDetails);
-        btnReq = (Button) findViewById(R.id.btn_req);
         dbInstance = CampDatabase.getDatabase(context);
         apiService = AppController.getRetrofitInstance();
         campSelectedValue = getIntent().getStringExtra("campId");
@@ -109,14 +107,6 @@ public class FieldsActivity extends AppCompatActivity {
             }
         });
 
-        btnReq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent reqAct = new Intent(FieldsActivity.this, RequirementActivity.class);
-                reqAct.putExtra("campId", getIntent().getStringExtra("campId"));
-                startActivity(reqAct);
-            }
-        });
 
 
         ArrayAdapter<District> districtAdapter = new ArrayAdapter<District>(this,
