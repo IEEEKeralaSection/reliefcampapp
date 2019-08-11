@@ -10,7 +10,7 @@ import xyz.appmaker.keralarescue.Room.Camp.CampNames;
 import xyz.appmaker.keralarescue.Room.PersonData.PersonDataDao;
 import xyz.appmaker.keralarescue.Room.PersonData.PersonDataEntity;
 
-@Database(entities = {CampNames.class, PersonDataEntity.class}, version = 3)
+@Database(entities = {CampNames.class, PersonDataEntity.class}, version = 4)
 public abstract class CampDatabase extends RoomDatabase {
     private static CampDatabase INSTANCE;
 

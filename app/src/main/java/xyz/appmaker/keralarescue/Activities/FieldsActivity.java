@@ -1,22 +1,30 @@
 package xyz.appmaker.keralarescue.Activities;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
@@ -39,7 +47,7 @@ import xyz.appmaker.keralarescue.Tools.PreferensHandler;
 public class FieldsActivity extends AppCompatActivity {
 
 
-    EditText nameEdt, ageEdt, addressEdt, mobileEdt, notesEdt;
+    EditText nameEdt, ageEdt, addressEdt, mobileEdt, notesEdt, checkinEdit;
     TextView syncDetailsTextView;
     Spinner campNameSpn, genderSpn, districtSpn;
     HashMap<String, String> distMap = new HashMap<>();
@@ -133,8 +141,27 @@ public class FieldsActivity extends AppCompatActivity {
         addressEdt = (EditText) findViewById(R.id.address);
         mobileEdt = (EditText) findViewById(R.id.mobile);
         notesEdt = (EditText) findViewById(R.id.note);
+        checkinEdit = findViewById(R.id.checkin);
+        checkinEdit.setKeyListener(null);
+        checkinEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    showDatePickerDialog(v);
+                    return true;
+                }
+                return false;
+            }
+        });
+        checkinEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    showDatePickerDialog(v);
+            }
+        });
+        checkinEdit.setFocusable(false);
         submitBtn = (Button) findViewById(R.id.submit);
-
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +179,7 @@ public class FieldsActivity extends AppCompatActivity {
                             mobileEdt.getText().toString(),
                             notesEdt.getText().toString(),
                             "new",
+                            checkinEdit.getText().toString(),
                             "0");
                     insetPersonDb(personDataModel);
                 }
@@ -222,6 +250,60 @@ public class FieldsActivity extends AppCompatActivity {
     }
 
 
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+        private Calendar defaultDate;
+        private DateChangeListner dateChangeListner;
+
+        public DatePickerFragment() {
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            int year = defaultDate.get(Calendar.YEAR);
+            int month = defaultDate.get(Calendar.MONTH);
+            int day = defaultDate.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void setDefaultDate(Calendar defaultDate) {
+            this.defaultDate = defaultDate;
+        }
+
+        public void setDateChangeListner(DateChangeListner dateChangeListner) {
+            this.dateChangeListner = dateChangeListner;
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Calendar cal = Calendar.getInstance();
+            cal.set(year, monthOfYear, dayOfMonth);
+            if(dateChangeListner!=null)
+                dateChangeListner.onChange(cal);
+        }
+    }
+
+    public interface DateChangeListner {
+        void onChange(Calendar newDate);
+    }
+
+    private void showDatePickerDialog(View view) {
+        final EditText editText = (EditText) view;
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.setDefaultDate(Calendar.getInstance());
+        newFragment.setDateChangeListner(new DateChangeListner() {
+            @Override
+            public void onChange(Calendar newDate) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                editText.setText(dateFormat.format(newDate.getTime()));
+            }
+        });
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
     public boolean validateData() {
         if (nameEdt.getText().toString().equals("")) {
 //            || ageEdt.getText().toString().equals("") || addressEdt.getText().toString().equals("") ||
@@ -261,6 +343,7 @@ public class FieldsActivity extends AppCompatActivity {
         addressEdt.setText("");
         mobileEdt.setText("");
         notesEdt.setText("");
+        checkinEdit.setText("");
         nameEdt.requestFocus();
 //        nameEdt.setText("");
 
