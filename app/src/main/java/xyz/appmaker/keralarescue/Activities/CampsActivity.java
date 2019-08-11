@@ -137,8 +137,9 @@ public class CampsActivity extends AppCompatActivity {
                     pref.setRecentCampID(camp.getId());
                     pref.setRecentCamp(camp.getName());
                 }
-                Intent fieldIntent = new Intent(CampsActivity.this, FieldsActivity.class);
+                Intent fieldIntent = new Intent(CampsActivity.this, CampHomeActivity.class);
                 fieldIntent.putExtra("campId", String.valueOf(camp.getId()));
+                fieldIntent.putExtra("campName",camp.getName());
                 startActivity(fieldIntent);
             }
         };
@@ -253,8 +254,9 @@ public class CampsActivity extends AppCompatActivity {
             btnRecent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent fieldIntent = new Intent(CampsActivity.this, FieldsActivity.class);
+                    Intent fieldIntent = new Intent(CampsActivity.this, CampHomeActivity.class);
                     fieldIntent.putExtra("campId", String.valueOf(pref.getRecentCampID()));
+                    fieldIntent.putExtra("campName",pref.getRecentCamp());
                     startActivity(fieldIntent);
                 }
             });

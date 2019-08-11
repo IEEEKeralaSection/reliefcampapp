@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activities.CampHomeActivity"
+            android:label="@string/title_activity_camp_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Activities.FieldsActivity"
             android:label="@string/title_activity_fields"
             android:theme="@style/AppTheme.NoActionBar" />

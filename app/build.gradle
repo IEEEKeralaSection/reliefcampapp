@@ -8,8 +8,8 @@ android {
         applicationId "xyz.appmaker.keralarescue"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 7
-        versionName "1.0"
+        versionCode 8
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 onesignal_app_id               : 'f25cf16a-1d78-4406-b6fc-92c8c7222ee0',

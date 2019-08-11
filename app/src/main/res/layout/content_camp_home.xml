@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activities.CampHomeActivity"
+    tools:showIn="@layout/activity_camp_home">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_margin="20dp">
+
+            <Button
+                android:id="@+id/btn_req"
+                android:layout_width="@dimen/camp_button_width"
+                android:layout_height="@dimen/camp_button_height"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:lines="1"
+                android:text="@string/add_requirement"
+                />
+            <Button
+                android:id="@+id/btn_inmates"
+                android:layout_width="@dimen/camp_button_width"
+                android:layout_height="@dimen/camp_button_height"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_below="@+id/btn_req"
+                android:lines="1"
+                android:text="@string/add_inmates"
+                />
+            <Button
+                android:id="@+id/btn_update_camp"
+                android:layout_width="@dimen/camp_button_width"
+                android:layout_height="@dimen/camp_button_height"
+                android:layout_below="@+id/btn_inmates"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:lines="1"
+                android:text="@string/edit_camp_information"
+                />
+
+        </RelativeLayout>
+
+</RelativeLayout>
