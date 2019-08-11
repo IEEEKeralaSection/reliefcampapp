@@ -3,7 +3,6 @@ package xyz.appmaker.keralarescue.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,17 +19,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +56,6 @@ public class CampsActivity extends AppCompatActivity {
 
     ArrayAdapter<District> districtAdapter;
     CardView recentCardview;
-    FirebaseStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +70,6 @@ public class CampsActivity extends AppCompatActivity {
         btnSearch = (Button) findViewById(R.id.search_btn);
         recentCardview = (CardView) findViewById(R.id.recent_card_view);
         progressBar = findViewById(R.id.progressBar);
-        storage = FirebaseStorage.getInstance();
 
         districtSpinner = findViewById(R.id.spinner_district);
         edtSearch = (EditText) findViewById(R.id.edt_search_camp);
@@ -293,40 +279,6 @@ public class CampsActivity extends AppCompatActivity {
 
             return true;
         }
-        if (id == R.id.action_backup) {
-            Toast.makeText(this, "Database is uploading", Toast.LENGTH_SHORT).show();
-            String dbPath = dbInstance.getOpenHelper().getWritableDatabase().getPath();
-            String deviceID = pref.getDeviceID();
-            // Create a storage reference from our app
-            StorageReference storageRef = storage.getReference();
-
-// Create a reference to "mountains.jpg"
-            StorageReference databaseRef = storageRef.child("db/" + pref.getUsername() + "/" + deviceID);
-            InputStream stream = null;
-            try {
-                Log.d("dbPath", dbPath);
-                stream = new FileInputStream(new File(dbPath));
-                UploadTask uploadTask = databaseRef.putStream(stream);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        Toast.makeText(CampsActivity.this, "Database update failed", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(CampsActivity.this, "Database updated", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
