@@ -35,7 +35,7 @@ public class PersonDataEntity {
     public String note;
 
     @ColumnInfo(name = "status")
-    public String status;
+    public String syncStatus;
 
     public PersonDataEntity() {
     }
@@ -49,7 +49,7 @@ public class PersonDataEntity {
         this.district = district;
         this.mobile = mobile;
         this.note = note;
-        this.status = status;
+        this.syncStatus = status;
     }
 
 
